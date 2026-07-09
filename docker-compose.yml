@@ -20,8 +20,8 @@ services:
       - 8.8.4.4
     environment:
       - PORT=5001
-      - MONGO_URI=mongodb+srv://saurashp_db_user:iVuDdvVBI8ulrdy2@cluster0.kncjsj5.mongodb.net/?appName=Cluster0
-      - JWT_SECRET=df0fdb9b49b380db3fb31e9389e18cc61bf4604b3cf5975ff1313795bd6b3345
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
       - REDIS_URL=redis://redis:6379
     depends_on:
       - redis
