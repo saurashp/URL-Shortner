@@ -1,0 +1,28 @@
+services:
+  # Caching service (Redis container)
+  redis:
+    image: redis:alpine
+    container_name: url-shortener-redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  # API server service (Express container)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: url-shortener-backend
+    ports:
+      - "5001:5001"
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    environment:
+      - PORT=5001
+      - MONGO_URI=mongodb+srv://saurashp_db_user:iVuDdvVBI8ulrdy2@cluster0.kncjsj5.mongodb.net/?appName=Cluster0
+      - JWT_SECRET=df0fdb9b49b380db3fb31e9389e18cc61bf4604b3cf5975ff1313795bd6b3345
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    restart: always
